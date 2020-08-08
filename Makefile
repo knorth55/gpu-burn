@@ -33,9 +33,20 @@ CCPATH=${GCCPATH}/bin
 CUDA_VER_MAJOR=$(shell cat ${CUDA_PATH}/version.txt | sed -e 's/CUDA Version //' | cut -d '.' -f 1)
 
 ifeq ($(shell expr ${CUDA_VER_MAJOR} \>= 9), 1)
-	NVCCFLAGS=-gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_35,code=compute_35 -gencode=arch=compute_37,code=compute_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -I. -I${CUDA_PATH}/include --fatbin
+	NVCCFLAGS=-gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_35,code=compute_35 \
+			  -gencode=arch=compute_37,code=compute_37 \
+			  -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 \
+			  -gencode=arch=compute_53,code=sm_53 \
+			  -gencode=arch=compute_60,code=sm_60 -gencode=arch=compute_61,code=sm_61 \
+			  -gencode=arch=compute_62,code=sm_62 \
+			  -gencode=arch=compute_70,code=sm_70 -gencode=arch=compute_72,code=sm_72 \
+			  -I. -I${CUDA_PATH}/include --fatbin
 else
-	NVCCFLAGS=-gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_35,code=compute_35 -gencode=arch=compute_37,code=compute_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -I. -I${CUDA_PATH}/include --fatbin
+	NVCCFLAGS=-gencode=arch=compute_20,code=sm_20 \
+			  -gencode=arch=compute_30,code=sm_30  -gencode=arch=compute_35,code=compute_35 \
+			  -gencode=arch=compute_37,code=compute_37 \
+			  -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 \
+			  -I. -I${CUDA_PATH}/include --fatbin
 endif
 
 all: gpu_burn
