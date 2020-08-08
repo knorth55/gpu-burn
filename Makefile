@@ -5,6 +5,10 @@ ifeq ($(CUDA_HOME), )
 	# If none of the above worked, try some other common paths
 	ifneq ($(wildcard /usr/local/cuda), )
 		CUDA_PATH=/usr/local/cuda
+	else ifneq ($(wildcard /usr/local/cuda-10.1),)
+		CUDA_PATH=/usr/local/cuda-10.1
+	else ifneq ($(wildcard /usr/local/cuda-10.0),)
+		CUDA_PATH=/usr/local/cuda-10.0
 	else ifneq ($(wildcard /usr/local/cuda-9.1),)
 		CUDA_PATH=/usr/local/cuda-9.1
 	else ifneq ($(wildcard /usr/local/cuda-9.0),)
